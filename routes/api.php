@@ -15,8 +15,14 @@ use App\Http\Controllers\PersonnelController;
 |
 */
 
+Route::get('/personnel ',[PersonnelController::class, 'index']);
+ 
+Route::post('/save',[PersonnelController::class, 'store']);
+ 
+Route::put('/update/{id}',[PersonnelController::class, 'update']);
+ 
+Route::delete('/delete/{id}',[PersonnelController::class, 'destroy']);
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::resource('personnel', PersonnelController::class);

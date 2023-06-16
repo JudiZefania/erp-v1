@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Models\Personnel;
-
 class PersonnelController extends Controller
 {
     /**
@@ -12,7 +12,8 @@ class PersonnelController extends Controller
      */
     public function index()
     {
-        return Personnel::all();
+        $personnel = Personnel::all();
+        return response()->json($personnel);
     }
 
     /**
@@ -28,22 +29,23 @@ class PersonnelController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nom' => 'required',
-            'prenom' => 'required',
-            'poste' => 'required',
-            'departement' => 'required'
+        $personnel = new Personnel([
+            'nom' => $request->input('nom'),
+            'prenom' => $request->input('prenom'),
+            'poste' => $request->input('poste'),
+            'departement' => $request->input('departement'),
         ]);
-
-        return Personnel::create($request->all());
+        $personnel->save();
+        return response()->json('Personnel created!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Personnel $personnel)
+    public function show($id)
     {
-        return $personnel;
+        $contact = Personnel::find($id);
+        return response()->json($contact);
     }
 
     /**
@@ -57,27 +59,20 @@ class PersonnelController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Personnel $personnel)
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            'nom' => 'required',
-            'prenom' => 'required',
-            'poste' => 'required',
-            'departement' => 'required'
-        ]);
-    
-        $personnel->update($request->all());
-    
-        return $personnel;
+        $personnel = Personnel::find($id);
+       $personnel->update($request->all());
+       return response()->json('Personnel updated'); 
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Personnel $personnel)
+    public function destroy($id)
     {
+        $personnel = Personnel::find($id);
         $personnel->delete();
-        
-        return response()->json(['message' => 'Personnel deleted successfully']); 
+        return response()->json(' deleted!');  
     }
 }
