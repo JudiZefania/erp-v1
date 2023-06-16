@@ -9,7 +9,7 @@ class Personnel extends Model
 {
     protected $table = 'personnel';
     protected $primaryKey = 'id';
-    protected $fillable = ['nom', 'prenom', 'poste','departement'];  
+    protected $fillable = ['nom', 'poste', 'departement','compagnie'];  
  
     use HasFactory;
 }

@@ -31,9 +31,9 @@ class PersonnelController extends Controller
     {
         $personnel = new Personnel([
             'nom' => $request->input('nom'),
-            'prenom' => $request->input('prenom'),
             'poste' => $request->input('poste'),
             'departement' => $request->input('departement'),
+            'compagnie' => $request->input('compagnie'),
         ]);
         $personnel->save();
         return response()->json('Personnel created!');
