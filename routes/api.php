@@ -25,4 +25,12 @@ Route::delete('/delete/{id}',[PersonnelController::class, 'destroy']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+
+    Route::get('/machine ',[MachineController::class, 'index']);
+ 
+    Route::post('/save',[MachineController::class, 'store']);
+     
+    Route::put('/update/{id}',[MachineController::class, 'update']);
+     
+    Route::delete('/delete/{id}',[MachineController::class, 'destroy']);    
 });
