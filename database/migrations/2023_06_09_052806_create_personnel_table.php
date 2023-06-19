@@ -11,14 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('personnel', function (Blueprint $table) {
-            $table->id();
-            $table->string('nom');
-            $table->string('poste');
-            $table->string('departement');
-            $table->string('compagnie');
-            $table->timestamps();
-        });
+        if(!Schema::hasTable('personnel')){
+            Schema::create('personnel', function (Blueprint $table) {
+                $table->id();
+                $table->string('nom');
+                $table->string('poste');
+                $table->string('departement');
+                $table->string('compagnie');
+                $table->timestamps();
+            });
+        }
+        
     }
 
     /**
